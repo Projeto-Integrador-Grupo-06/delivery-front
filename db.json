@@ -1,35 +1,43 @@
 {
-    "usuarios": [
-        {
-            "id": 1,
-            "nome": "Administrador",
-            "usuario": "admin@email.com",
-            "senha": "123456"
-        },
-        {
-            "id": 2,
-            "nome": "Maria",
-            "usuario": "maria@email.com",
-            "senha": "123456"
-        }
-    ],
-    "categorias": [
-        {
-            "id": 1,
-            "tipo": "Bolo",
-            "categoriaVegano": false,
-            "categoriaOrganico": false,
-            "descricao": "O bolo menos saudável do mundo!"
-        }
-    ],
-    "produtos": [
-        {
-            "id": 1,
-            "nome": "Bolo de Chocolate 1Kg",
-            "valor": 50.00,
-            "marca": "LeBolle",
-            "validade": "04/12/2026",
-            "categoriaId": 1
-        }
-    ]
+  "usuarios": [
+    {
+      "id": "1",
+      "nome": "Administrador",
+      "usuario": "admin@email.com",
+      "senha": "123456"
+    },
+    {
+      "id": "2",
+      "nome": "Maria",
+      "usuario": "maria@email.com",
+      "senha": "123456"
+    }
+  ],
+  "categorias": [
+    {
+      "id": "1",
+      "tipo": "Bolo",
+      "categoriaVegano": false,
+      "categoriaOrganico": false,
+      "descricao": "O bolo menos saudável do mundo!"
+    }
+  ],
+  "produtos": [
+    {
+      "id": "1",
+      "nome": "Bolo de Chocolate 1Kg",
+      "valor": 50,
+      "marca": "LeBolle",
+      "validade": "04/12/2026",
+      "categoriaId": 1
+    },
+    {
+      "nome": "Salada de frutas",
+      "valor": "25.00",
+      "marca": "mc donalds",
+      "validade": "15/07/2007",
+      "id": "EL7_kYoBv3w"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

@@ -1,9 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Karla:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Karla:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
-
-@theme {
-  --font-titulo: "Julius Sans One", sans-serif;
-  --font-texto: "Karla", sans-serif;
-}
-@import url("https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Karla:wght@300;400;500;600;700&display=swap");
