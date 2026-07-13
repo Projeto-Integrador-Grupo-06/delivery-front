@@ -1,5 +1,5 @@
-function ListarProdutos() {
-  return <div>ListarProdutos</div>
+function ListarCategorias() {
+  return <div>ListarCategorias</div>
 }
 
-export default ListarProdutos
+export default ListarCategorias
