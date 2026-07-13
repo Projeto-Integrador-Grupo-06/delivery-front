@@ -1,9 +1,15 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 import type Categoria from "../../../models/Categoria";
+import { atualizar, buscar, cadastrar } from "../../../service/Service";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function FormCategoria() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [categoria, setCategoria] = useState<Categoria>({
     tipo: "",
@@ -12,9 +18,43 @@ function FormCategoria() {
     categoriaOrganico: false,
   });
 
-  function handleSubmit(e: React.FormEvent) {
+  // Busca os dados da categoria quando é edição
+  useEffect(() => {
+    if (id !== undefined) {
+      buscarPorId(id);
+    }
+  }, [id]);
+
+  async function buscarPorId(id: string) {
+    try {
+      setIsLoading(true);
+      await buscar(`/categorias/${id}`, setCategoria);
+    } catch (error) {
+      ToastAlerta("Erro ao buscar a categoria", "erro");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    console.log("Categoria a ser cadastrada:", categoria);
+    setIsLoading(true);
+
+    try {
+      if (id !== undefined) {
+        await atualizar(`/categorias/${id}`, categoria, setCategoria);
+        ToastAlerta("Categoria atualizada com sucesso!", "sucesso");
+      } else {
+        await cadastrar(`/categorias`, categoria, setCategoria);
+        ToastAlerta("Categoria cadastrada com sucesso!", "sucesso");
+      }
+
+      navigate("/categorias"); // ajusta pra rota real da sua listagem
+    } catch (error) {
+      ToastAlerta("Erro ao salvar a categoria", "erro");
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -91,10 +131,23 @@ function FormCategoria() {
 
           <button
             type="submit"
-            className="font-texto bg-[#9DBDB8] hover:text-[#D22519] text-white font-semibold py-3 rounded-lg transition"
+            disabled={isLoading}
+            className="font-texto bg-[#9DBDB8] hover:text-[#D22519] text-white font-semibold py-3 rounded-lg transition flex justify-center items-center disabled:opacity-70"
           >
-            {id ? "Atualizar" : "Cadastrar"}
+            {isLoading ? (
+              <ClipLoader color="#ffffff" size={20} />
+            ) : (
+              id ? "Atualizar" : "Cadastrar"
+            )}
           </button>
+          {id && (
+            <Link
+              to={`/categorias/deletar/${id}`}
+              className="font-texto text-center text-[#D22519] underline"
+            >
+              Deletar esta categoria
+            </Link>
+          )}
 
         </form>
 
