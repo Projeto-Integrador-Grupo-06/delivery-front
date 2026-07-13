@@ -8,7 +8,7 @@ function Home() {
         <div className="grid lg:grid-cols-6 w-screen place-items-center font-bold bg-[#9dbdb8] rounded-4xl p-0">
           <div className="flex flex-col gap-4 items-center justify-center py-4 col-span-4 ">
             <h2
-              className="text-5xl font-julio-sanz-one font-bold text-[#d22519] "
+              className="text-5xl font-bold text-[#d22519] "
               style={{ fontFamily: "'Julius Sans One', sans-serif" }}
             >
               Organize sua alimentação!

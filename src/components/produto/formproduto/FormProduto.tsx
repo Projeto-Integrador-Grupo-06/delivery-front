@@ -36,7 +36,7 @@ function FormProduto() {
 
     try {
       if (id !== undefined) {
-        await atualizar("/produtos", produto, setProduto    );
+        await atualizar("/produtos", produto, setProduto);
 
         alert("O Produto foi atualizado com sucesso!");
       } else {

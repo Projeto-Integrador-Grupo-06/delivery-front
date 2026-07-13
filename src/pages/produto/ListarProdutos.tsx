@@ -7,18 +7,16 @@ import CardProduto from "../../components/produto/cardproduto/CardProduto";
 function ListaProdutos() {
 
     const [isLoading, setIsLoading] = useState(false);
-    const [produtos, setProdutos] = useState<Produto[]>([]);
+    const [produtos, setProdutos] = useState<(Produto & { id?: string | number })[]>([]);
 
     useEffect(() => {
         buscarProdutos();
-    }, [produtos.length]);
+    }, []);
 
     async function buscarProdutos() {
         try {
             setIsLoading(true);
-
             await buscar("/produtos", setProdutos);
-
         } catch (error) {
             console.error("Erro ao buscar produtos:", error);
         } finally {
@@ -50,7 +48,7 @@ function ListaProdutos() {
 
                         {produtos.map((produto) => (
                             <CardProduto
-                                key={produto.idProduto}
+                                key={produto.id}
                                 produto={produto}
                             />
                         ))}

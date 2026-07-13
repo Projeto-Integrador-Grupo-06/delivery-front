@@ -2,11 +2,10 @@ import { Link } from "react-router-dom";
 import type Produto from "../../../models/Produto";
 
 interface CardProdutosProps {
-  produto: Produto;
+  produto: Produto & { id?: string | number };
 }
 
 function CardProduto({ produto }: CardProdutosProps) {
-
   console.log("PRODUTO RECEBIDO NO CARD:", produto);
 
   return (
@@ -21,7 +20,6 @@ function CardProduto({ produto }: CardProdutosProps) {
         </h2>
       </div>
 
-
       <div className="flex items-center justify-between bg-[#9DBDB8] px-4 py-4">
 
         <p
@@ -35,11 +33,10 @@ function CardProduto({ produto }: CardProdutosProps) {
           className="text-base font-bold text-[#D22519]"
           style={{ fontFamily: "'Julius Sans One', sans-serif" }}
         >
-          R$ {produto.valor.toFixed(2)}
+          R$ {Number(produto.valor).toFixed(2)}
         </p>
 
       </div>
-
 
       <div className="flex">
 
