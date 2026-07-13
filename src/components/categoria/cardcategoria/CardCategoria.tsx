@@ -21,7 +21,6 @@ function CardCategoria({ categoria }: CardCategoriasProps) {
         </h2>
       </div>
 
-
       <div className="flex items-center justify-between bg-[#9DBDB8] px-4 py-4">
 
         <p
@@ -31,8 +30,14 @@ function CardCategoria({ categoria }: CardCategoriasProps) {
           {categoria.tipo}
         </p>
 
-      </div>
+        <p
+          className="text-sm text-right text-[#D22519]"
+          style={{ fontFamily: "'Karla', sans-serif" }}
+        >
+          {categoria.descricao}
+        </p>
 
+      </div>
 
       <div className="flex">
 
@@ -43,7 +48,6 @@ function CardCategoria({ categoria }: CardCategoriasProps) {
         >
           Editar
         </Link>
-
 
         <Link
           to={`/categorias/deletar/${categoria.id}`}
