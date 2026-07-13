@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom"
+import logo from "../../assets/img/logobranca.png"
 
 function Navbar() {
   return (
     <nav className="w-full bg-[#D22519] flex justify-between items-center px-10 py-4">
       
-      <Link to="/" className="text-[#F0E7D6] text-2xl tracking-widest uppercase"
+      <Link to="/" className="flex items-center gap-2 text-[#F0E7D6] text-2xl tracking-widest uppercase"
         style={{ fontFamily: 'Julius Sans One, serif' }}>
+        <img src={logo} alt="RangoBox Logo" className="w-14 h-14 object-contain" />
         RangoBox
       </Link>
 

@@ -36,11 +36,11 @@ function FormProduto() {
 
     try {
       if (id !== undefined) {
-        await atualizar("/produtos", produto, setProduto, {});
+        await atualizar("/produtos", produto, setProduto    );
 
         alert("O Produto foi atualizado com sucesso!");
       } else {
-        await cadastrar("/produtos", produto, setProduto, {});
+        await cadastrar("/produtos", produto, setProduto);
 
         alert("O Produto foi cadastrado com sucesso!");
       }
