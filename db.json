@@ -30,6 +30,13 @@
       "marca": "LeBolle",
       "validade": "04/12/2026",
       "categoriaId": 1
+    },
+    {
+      "nome": "bolo",
+      "valor": "25.00",
+      "marca": "mc donalds",
+      "validade": "15/07/2007",
+      "id": "R3biZjKUtWA"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

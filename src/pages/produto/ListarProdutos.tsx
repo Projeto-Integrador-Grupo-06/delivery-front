@@ -42,7 +42,8 @@ function ListaProdutos() {
     }
 
     return (
-        <>
+        <div className="w-full bg-[#F0E7D6] py-4">
+
             {isLoading && (
                 <div className="flex justify-center w-full my-8">
                     <SyncLoader
@@ -52,7 +53,7 @@ function ListaProdutos() {
                 </div>
             )}
 
-            <div className="flex justify-center w-full my-4">
+            <div className="flex justify-center w-full">
                 <div className="container flex flex-col">
 
                     {!isLoading && produtos.length === 0 && (
@@ -91,19 +92,18 @@ function ListaProdutos() {
                     )}
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
                         {produtos.map((produto) => (
                             <CardProduto
                                 key={produto.id}
                                 produto={produto}
                             />
                         ))}
-
                     </div>
 
                 </div>
             </div>
-        </>
+
+        </div>
     );
 }
 
