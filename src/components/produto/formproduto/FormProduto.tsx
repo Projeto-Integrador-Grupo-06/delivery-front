@@ -126,7 +126,8 @@ function FormProduto() {
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     atualizarEstado(e)
                   }
-                  className="block min-w-0  py-1.5 pr-3 pl-1 text-base text-[#D22519] placeholder:text-[#D22519] border-2 border-[#D22519] rounded-[10px] focus:outline-none sm:text-sm/6 w-[1201.33px] h-[71.71px] font-['Karla']"
+                  className="block min-w-0  py-1.5 pr-3 pl-1 text-base text-[#D22519] placeholder:text-[#D22519] border-2
+                   border-[#D22519] rounded-[10px] focus:outline-none sm:text-sm/6 w-[1201.33px] h-[71.71px] font-['Karla']"
                 />
               </div>
             </div>

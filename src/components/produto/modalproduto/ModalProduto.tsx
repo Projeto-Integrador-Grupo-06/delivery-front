@@ -11,8 +11,7 @@ function ModalProduto(){
         </button>}
         modal  contentStyle={{
     width: "auto",
-    maxWidth: "95%",
-    minHeight: "600px",
+    height: "600px",
     borderRadius: "1rem",
     padding: "2rem",
     overflowY: "auto",
