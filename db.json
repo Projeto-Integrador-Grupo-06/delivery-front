@@ -20,6 +20,13 @@
       "categoriaVegano": false,
       "categoriaOrganico": false,
       "descricao": "O bolo menos saudável do mundo!"
+    },
+    {
+      "tipo": "Lanches",
+      "descricao": "Lanche tropical com abacaxi",
+      "categoriaVegano": false,
+      "categoriaOrganico": false,
+      "id": "kUHA6QfLQEc"
     }
   ],
   "produtos": [
