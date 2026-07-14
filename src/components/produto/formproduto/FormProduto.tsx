@@ -4,6 +4,8 @@ import type Produto from "../../../models/Produto";
 import { atualizar, cadastrar } from "../../../service/Service";
 import { ClipLoader } from "react-spinners";
 
+import { ToastAlerta } from "../../../utils/ToastAlerta";
+
 function FormProduto() {
   const navigate = useNavigate();
 
@@ -16,7 +18,6 @@ function FormProduto() {
     valor: 0,
     marca: "",
     validade: "",
-    
   });
 
   function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
@@ -41,9 +42,9 @@ function FormProduto() {
         alert("O Produto foi atualizado com sucesso!");
       } else {
         await cadastrar("/produtos", produto, setProduto);
-
-        alert("O Produto foi cadastrado com sucesso!");
+        ToastAlerta("O Produto foi atualizado com sucesso!", "sucesso");
       }
+
 
       retornar();
     } catch (error: any) {
@@ -126,7 +127,8 @@ function FormProduto() {
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     atualizarEstado(e)
                   }
-                  className="block min-w-0  py-1.5 pr-3 pl-1 text-base text-[#D22519] placeholder:text-[#D22519] border-2 border-[#D22519] rounded-[10px] focus:outline-none sm:text-sm/6 w-[1201.33px] h-[71.71px] font-['Karla']"
+                  className="block min-w-0  py-1.5 pr-3 pl-1 text-base text-[#D22519] placeholder:text-[#D22519] border-2
+                   border-[#D22519] rounded-[10px] focus:outline-none sm:text-sm/6 w-[1201.33px] h-[71.71px] font-['Karla']"
                 />
               </div>
             </div>
