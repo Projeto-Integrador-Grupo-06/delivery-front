@@ -14,7 +14,7 @@ function ModalProduto(){
     height: "600px",
     borderRadius: "1rem",
     padding: "2rem",
-    overflowY: "auto",
+    overflowY: "auto"
   }}>
 
             <FormProduto />

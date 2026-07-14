@@ -13,8 +13,11 @@ import FormProduto from "./components/produto/formproduto/FormProduto"
 import DeletarProduto from "./components/produto/deletarproduto/DeletarProduto"
 import EditarProduto from "./components/produto/editarProduto/EditarProduto"
 
+
+
 function App() {
   return (
+
     <BrowserRouter>
       <Navbar />
       <div className="min-h-[80vh] bg-[#F0E7D6]">

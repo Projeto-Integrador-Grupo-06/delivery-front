@@ -4,6 +4,8 @@ import type Produto from "../../../models/Produto";
 import { atualizar, cadastrar } from "../../../service/Service";
 import { ClipLoader } from "react-spinners";
 
+import { ToastAlerta } from "../../../utils/ToastAlerta";
+
 function FormProduto() {
   const navigate = useNavigate();
 
@@ -16,7 +18,6 @@ function FormProduto() {
     valor: 0,
     marca: "",
     validade: "",
-    
   });
 
   function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
@@ -36,14 +37,13 @@ function FormProduto() {
 
     try {
       if (id !== undefined) {
-        await atualizar("/produtos", produto, setProduto );
-
-        alert("O Produto foi atualizado com sucesso!");
+        await atualizar("/produtos", produto, setProduto);
+        ToastAlerta("O Produto foi atualizado com sucesso!", "sucesso");
       } else {
         await cadastrar("/produtos", produto, setProduto);
-
-        alert("O Produto foi cadastrado com sucesso!");
+        ToastAlerta("O Produto foi atualizado com sucesso!", "sucesso");
       }
+
 
       retornar();
     } catch (error: any) {
