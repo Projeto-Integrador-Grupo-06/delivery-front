@@ -27,17 +27,30 @@
       "categoriaVegano": false,
       "categoriaOrganico": true,
       "id": "25cEnt7skSA"
+    },
+    {
+      "tipo": "Alimentos Veganos",
+      "descricao": "Sem ingredientes animais.",
+      "categoriaVegano": true,
+      "categoriaOrganico": false,
+      "id": "BIANPhQGJTI"
+    },
+    {
+      "tipo": "Bebidas Saudáveis",
+      "descricao": "Bebidas naturais.",
+      "categoriaVegano": true,
+      "categoriaOrganico": true,
+      "id": "q_OSR9HFit0"
+    },
+    {
+      "tipo": "Doces",
+      "descricao": "Produtos variados",
+      "categoriaVegano": false,
+      "categoriaOrganico": false,
+      "id": "iWihZMAMLaQ"
     }
   ],
   "produtos": [
-    {
-      "id": "1",
-      "nome": "Bolo de Chocolate 1Kg",
-      "valor": "50.75",
-      "marca": "LeBolle",
-      "validade": "04/12/2026",
-      "categoriaId": 1
-    },
     {
       "nome": "Arroz",
       "valor": "15",
@@ -51,6 +64,34 @@
         "id": "25cEnt7skSA"
       },
       "id": "dVkAyxLgOnQ"
+    },
+    {
+      "nome": "Suco natural",
+      "valor": "12",
+      "marca": "FitLife",
+      "validade": "10/12/2026",
+      "categoria": {
+        "tipo": "Bebidas Saudáveis",
+        "descricao": "Bebidas naturais.",
+        "categoriaVegano": true,
+        "categoriaOrganico": true,
+        "id": "q_OSR9HFit0"
+      },
+      "id": "VL-dhzSql74"
+    },
+    {
+      "nome": "Chocolate ao leite",
+      "valor": "6",
+      "marca": "Doce Sabor",
+      "validade": "05/11/2026",
+      "categoria": {
+        "tipo": "Doces",
+        "descricao": "Produtos variados",
+        "categoriaVegano": false,
+        "categoriaOrganico": false,
+        "id": "iWihZMAMLaQ"
+      },
+      "id": "YzHC_uDI67Q"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
