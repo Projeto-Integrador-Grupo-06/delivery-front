@@ -19,7 +19,6 @@ function ModalProduto() {
 
                 <FormProduto />
             </Popup>
-
         </>
     )
 }
