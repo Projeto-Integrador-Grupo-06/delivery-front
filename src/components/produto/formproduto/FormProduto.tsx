@@ -4,7 +4,6 @@ import type Produto from "../../../models/Produto";
 import type Categoria from "../../../models/Categoria";
 import { atualizar, buscar, cadastrar } from "../../../service/Service";
 import { ClipLoader } from "react-spinners";
-
 import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function FormProduto() {
@@ -18,13 +17,14 @@ function FormProduto() {
     valor: 0,
     marca: "",
     validade: "",
+    categoria: null,
   });
 
   async function buscarCategorias() {
     try {
       await buscar("/categorias", setCategorias);
     } catch (error) {
-      alert("Erro ao carregar as categorias.");
+      ToastAlerta("Erro ao carregar as categorias.", "success");
     }
   }
 
@@ -65,20 +65,20 @@ function FormProduto() {
     try {
       if (id !== undefined) {
         await atualizar("/produtos", produto, setProduto);
-        alert("O Produto foi atualizado com sucesso!");
+        ToastAlerta("O Produto foi atualizado com sucesso!", "sucesso");
       } else {
         await cadastrar("/produtos", produto, setProduto);
-        ToastAlerta("O Produto foi atualizado com sucesso!", "sucesso");
+        ToastAlerta("O Produto foi cadastrado com sucesso!", "sucesso");
       }
-
 
       retornar();
     } catch (error: any) {
       if (!error.toString().includes("401")) {
-        alert(
+        ToastAlerta(
           id !== undefined
             ? "Erro ao atualizar o Produto."
-            : "Erro ao cadastrar o Produto."
+            : "Erro ao cadastrar o Produto.",
+          "erro"
         );
       }
     } finally {
@@ -185,25 +185,19 @@ function FormProduto() {
             />
           </div>
 
-          <div className="sm:col-span-4">
-            <label className="block text-sm/6 font-medium text-[#D22519] pl-9 p-1.5 font-['Karla']">
-              Marca do Produto
-            </label>
-            <div className="mt-2">
-              <div className="flex items-center rounded-md bg-white/5 pl-3 outline-1 -outline-offset-1 outline-white/10 ">
-                <input
-                  id="marca"
-                  type="text"
-                  name="marca"
-                  placeholder="Informe a Marca do Produto:"
-                  value={produto.marca}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    atualizarEstado(e)
-                  }
-                  className="block min-w-0  py-1.5 pr-3 pl-1 text-base text-[#D22519] placeholder:text-[#D22519] border-2
-                   border-[#D22519] rounded-[10px] focus:outline-none sm:text-sm/6 w-[1201.33px] h-[71.71px] font-['Karla']"
-                />
-              </div>
+          {/* Marca + Validade lado a lado */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <label className={labelClasses}>Marca do Produto</label>
+              <input
+                id="marca"
+                type="text"
+                name="marca"
+                placeholder="Informe a Marca do Produto:"
+                value={produto.marca}
+                onChange={atualizarEstado}
+                className={inputClasses}
+              />
             </div>
 
             <div>

@@ -2,6 +2,7 @@ import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { atualizar, buscar } from "../../../service/Service";
 import type Produto from "../../../models/Produto";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function EditarProduto() {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ function EditarProduto() {
 
   useEffect(() => {
     if (id !== undefined) {
-      buscar(`/produtos/${id}`, setProduto, {});
+      buscar(`/produtos/${id}`, setProduto);
     }
   }, [id]);
 
@@ -33,13 +34,13 @@ function EditarProduto() {
     e.preventDefault();
 
     try {
-      await atualizar(`/produtos/${id}`, produto, setProduto, {});
+      await atualizar(`/produtos/${id}`, produto, setProduto);
 
-      alert("Produto atualizado com sucesso!");
+      ToastAlerta("Produto atualizado com sucesso!", "sucesso");
 
       navigate("/produtos");
     } catch (error) {
-      alert("Erro ao atualizar produto!");
+      ToastAlerta("Erro ao atualizar produto!", "erro");
     }
   }
   return (

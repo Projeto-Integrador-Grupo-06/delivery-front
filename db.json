@@ -22,69 +22,35 @@
       "descricao": "O bolo menos saudável do mundo!"
     },
     {
-      "tipo": "salada",
-      "descricao": "tipos de salada",
-      "categoriaVegano": true,
+      "tipo": "Grãos",
+      "descricao": "Grãos legais",
+      "categoriaVegano": false,
       "categoriaOrganico": true,
-      "id": "P3viCTryQh8"
+      "id": "25cEnt7skSA"
     }
   ],
   "produtos": [
     {
       "id": "1",
       "nome": "Bolo de Chocolate 1Kg",
-      "valor": 50,
+      "valor": "50.75",
       "marca": "LeBolle",
       "validade": "04/12/2026",
+      "categoriaId": 1
+    },
+    {
+      "nome": "Arroz",
+      "valor": "15",
+      "marca": "Namorado",
+      "validade": "24/08/2026",
       "categoria": {
-        "id": "1",
-        "tipo": "Bolo",
+        "tipo": "Grãos",
+        "descricao": "Grãos legais",
         "categoriaVegano": false,
-        "categoriaOrganico": false,
-        "descricao": "O bolo menos saudável do mundo!"
-      }
-    },
-    {
-      "id": "R3biZjKUtWA",
-      "nome": "bolo",
-      "valor": 25,
-      "marca": "mc donalds",
-      "validade": "15/07/2007",
-      "categoria": {
-        "id": "1",
-        "tipo": "Bolo",
-        "categoriaVegano": false,
-        "categoriaOrganico": false,
-        "descricao": "O bolo menos saudável do mundo!"
-      }
-    },
-    {
-      "nome": "salada de frutas",
-      "valor": "25.00",
-      "marca": "mc donalds",
-      "validade": "15/07/2007",
-      "categoria": {
-        "tipo": "salada",
-        "descricao": "tipos de salada",
-        "categoriaVegano": true,
         "categoriaOrganico": true,
-        "id": "P3viCTryQh8"
+        "id": "25cEnt7skSA"
       },
-      "id": "e2YNGixauRU"
-    },
-    {
-      "nome": "Salada de legumes",
-      "valor": "50.00",
-      "marca": "mc donalds",
-      "validade": "15/07/2007",
-      "categoria": {
-        "tipo": "salada",
-        "descricao": "tipos de salada",
-        "categoriaVegano": true,
-        "categoriaOrganico": true,
-        "id": "P3viCTryQh8"
-      },
-      "id": "dO5tsQsA4bs"
+      "id": "dVkAyxLgOnQ"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

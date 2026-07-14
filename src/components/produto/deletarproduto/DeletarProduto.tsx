@@ -102,7 +102,7 @@ function DeletarProduto() {
                             className="text-base font-bold text-[#D22519]"
                             style={{ fontFamily: "'Julius Sans One', sans-serif" }}
                         >
-                            R$ {produto.valor?.toFixed(2)}
+                            R$ {Number(produto.valor).toFixed(2)}
                         </p>
 
                     </div>
