@@ -10,7 +10,7 @@ function ModalProduto(){
 
         </button>}
         modal  contentStyle={{
-    width: "auto",
+   width: "auto",
     height: "600px",
     borderRadius: "1rem",
     padding: "2rem",

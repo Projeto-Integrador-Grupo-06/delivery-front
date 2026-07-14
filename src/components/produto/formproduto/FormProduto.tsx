@@ -38,7 +38,8 @@ function FormProduto() {
     try {
       if (id !== undefined) {
         await atualizar("/produtos", produto, setProduto);
-        ToastAlerta("O Produto foi atualizado com sucesso!", "sucesso");
+
+        alert("O Produto foi atualizado com sucesso!");
       } else {
         await cadastrar("/produtos", produto, setProduto);
         ToastAlerta("O Produto foi atualizado com sucesso!", "sucesso");
