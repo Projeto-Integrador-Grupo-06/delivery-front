@@ -1,4 +1,4 @@
-# <img src="./assets/img/logo.png" alt="RangoBox Logo" width="55" align="center" /> RangoBox
+# <img src="./src/assets/img/logo.png" alt="RangoBox Logo" width="55" align="center" /> RangoBox
 
 > Um ecossistema completo de delivery de comida projetado para aproximar clientes de seus restaurantes favoritos de forma rápida, intuitiva e com total flexibilidade de escolha.
 
