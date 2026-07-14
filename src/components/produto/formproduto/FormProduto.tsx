@@ -1,29 +1,56 @@
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import type Produto from "../../../models/Produto";
-import { atualizar, cadastrar } from "../../../service/Service";
+import type Categoria from "../../../models/Categoria";
+import { atualizar, buscar, cadastrar } from "../../../service/Service";
 import { ClipLoader } from "react-spinners";
 
 function FormProduto() {
   const navigate = useNavigate();
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
   const { id } = useParams<{ id: string }>();
+  const [categorias, setCategorias] = useState<Categoria[]>([]);
 
   const [produto, setProduto] = useState<Produto>({
     nome: "",
     valor: 0,
     marca: "",
     validade: "",
-    
+    categoria: null,
   });
 
-  function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
+  async function buscarCategorias() {
+    try {
+      await buscar("/categorias", setCategorias);
+    } catch (error) {
+      alert("Erro ao carregar as categorias.");
+    }
+  }
+
+  useEffect(() => {
+    buscarCategorias();
+  }, []);
+
+  function atualizarEstado(
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) {
     setProduto({
       ...produto,
       [e.target.name]: e.target.value,
     });
+  }
+
+  function selecionarCategoria(e: ChangeEvent<HTMLSelectElement>) {
+    const categoriaSelecionada = categorias.find(
+      (categoria) => categoria.id == e.target.value
+    );
+
+    if (categoriaSelecionada) {
+      setProduto({
+        ...produto,
+        categoria: categoriaSelecionada,
+      });
+    }
   }
 
   function retornar() {
@@ -37,23 +64,19 @@ function FormProduto() {
     try {
       if (id !== undefined) {
         await atualizar("/produtos", produto, setProduto);
-
         alert("O Produto foi atualizado com sucesso!");
       } else {
         await cadastrar("/produtos", produto, setProduto);
-
         alert("O Produto foi cadastrado com sucesso!");
       }
 
       retornar();
     } catch (error: any) {
-      if (error.toString().includes("401")) {
-        // tratar erro de autenticação, se necessário
-      } else {
+      if (!error.toString().includes("401")) {
         alert(
           id !== undefined
             ? "Erro ao atualizar o Produto."
-            : "Erro ao cadastrar o Produto.",
+            : "Erro ao cadastrar o Produto."
         );
       }
     } finally {
@@ -61,108 +84,184 @@ function FormProduto() {
     }
   }
 
+  const inputClasses = `
+    w-full
+    h-[64px]
+    px-6
+    rounded-xl
+    border-2
+    border-[#D22519]
+    text-lg
+    text-[#D22519]
+    placeholder:text-[#D22519]/60
+    bg-white
+    shadow-sm
+    transition-all
+    duration-200
+    focus:outline-none
+    focus:ring-4
+    focus:ring-[#D22519]/20
+    focus:border-[#D22519]
+    font-['Karla']
+  `;
+
+  const labelClasses = `
+    block
+    text-xl
+    text-[#D22519]
+    font-bold
+    font-['Karla']
+    mb-3
+  `;
+
   return (
-    <div>
-      <h1 className="text-4xl text-[#D22519] text-center p-6 m-6 font-bold font-['Julius_Sans_One']">
+    <div
+      className="
+        min-h-screen
+        w-full
+        bg-[#FDFDF5]
+        flex
+        flex-col
+        items-center
+        py-12
+        px-4
+      "
+    >
+      <h1
+        className="
+          text-5xl
+          text-[#D22519]
+          text-center
+          mb-10
+          font-bold
+          font-['Julius_Sans_One']
+        "
+      >
         {id === undefined ? "Cadastrar Produto" : "Atualizar Produto"}
       </h1>
 
-      <form action="" onSubmit={gerarNovoProduto}>
-        <div className="flex flex-col justify-center items-center content-center">
-          <div className="sm:col-span-4">
-            <label className="block text-sm/6 font-medium text-[#D22519] pl-9 p-1.5 font-['Karla'] ">
-              Título Produto
-            </label>
-            <div className="mt-2">
-              <div className="flex items-center rounded-md bg-white/5 pl-3 outline-1 -outline-offset-1 outline-white/10 ">
-                <input
-                  id="nome"
-                  type="text"
-                  name="nome"
-                  placeholder="Descreva o Nome:"
-                  value={produto.nome}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    atualizarEstado(e)
-                  }
-                  className="block min-w-0  py-1.5 pr-3 pl-1 text-base text-[#D22519] placeholder:text-[#D22519] border-2 border-[#D22519] rounded-[10px] focus:outline-none sm:text-sm/6 w-[1201.33px] h-[71.71px] font-['Karla']"
-                />
-              </div>
+      <form
+        onSubmit={gerarNovoProduto}
+        className="
+          bg-white
+          w-[95%]
+          max-w-[1800px]
+          rounded-3xl
+          shadow-2xl
+          px-10
+          md:px-20
+          py-12
+        "
+      >
+        <div className="flex flex-col gap-8">
+
+          {/* Nome */}
+          <div>
+            <label className={labelClasses}>Título Produto</label>
+            <input
+              id="nome"
+              type="text"
+              name="nome"
+              placeholder="Descreva o Nome:"
+              value={produto.nome}
+              onChange={atualizarEstado}
+              className={inputClasses}
+            />
+          </div>
+
+          {/* Valor */}
+          <div>
+            <label className={labelClasses}>Valor do Produto</label>
+            <input
+              id="valor"
+              type="number"
+              name="valor"
+              placeholder="Informe o valor do Produto em R$:"
+              value={produto.valor}
+              onChange={atualizarEstado}
+              className={inputClasses}
+            />
+          </div>
+
+          {/* Marca + Validade lado a lado */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <label className={labelClasses}>Marca do Produto</label>
+              <input
+                id="marca"
+                type="text"
+                name="marca"
+                placeholder="Informe a Marca do Produto:"
+                value={produto.marca}
+                onChange={atualizarEstado}
+                className={inputClasses}
+              />
+            </div>
+
+            <div>
+              <label className={labelClasses}>Validade do Produto</label>
+              <input
+                id="validade"
+                type="text"
+                name="validade"
+                placeholder="Informe a Validade: dd/mm/aaaa"
+                value={produto.validade}
+                onChange={atualizarEstado}
+                className={inputClasses}
+              />
             </div>
           </div>
 
-          <div className="sm:col-span-4">
-            <label className="block text-sm/6 font-medium text-[#D22519] pl-9 p-1.5 font-['Karla']">
-              Valor do Produto
-            </label>
-            <div className="mt-2">
-              <div className="flex items-center rounded-md bg-white/5 pl-3 outline-1 -outline-offset-1 outline-white/10 ">
-                <input
-                  id="valor"
-                  type="text"
-                  name="valor"
-                  placeholder="Informe o Valor do Produto em R$:"
-                  value={produto.valor}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    atualizarEstado(e)
-                  }
-                  className="block min-w-0  py-1.5 pr-3 pl-1 text-base text-[#D22519] placeholder:text-[#D22519] border-2 border-[#D22519] rounded-[10px] focus:outline-none sm:text-sm/6 w-[1201.33px] h-[71.71px] font-['Karla']"
-                />
-              </div>
-            </div>
+          {/* Categoria */}
+          <div>
+            <label className={labelClasses}>Categoria</label>
+            <select
+              id="categoria"
+              name="categoria"
+              value={produto.categoria?.id ?? ""}
+              onChange={selecionarCategoria}
+              className={`${inputClasses} cursor-pointer hover:border-[#D22519]/80`}
+            >
+              <option value="">Selecione uma categoria</option>
+              {categorias.map((categoria) => (
+                <option key={categoria.id} value={categoria.id}>
+                  {categoria.tipo}
+                </option>
+              ))}
+            </select>
           </div>
 
-          <div className="sm:col-span-4">
-            <label className="block text-sm/6 font-medium text-[#D22519] pl-9 p-1.5 font-['Karla']">
-              Marca do Produto
-            </label>
-            <div className="mt-2">
-              <div className="flex items-center rounded-md bg-white/5 pl-3 outline-1 -outline-offset-1 outline-white/10 ">
-                <input
-                  id="marca"
-                  type="text"
-                  name="marca"
-                  placeholder="Informe a Marca do Produto:"
-                  value={produto.marca}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    atualizarEstado(e)
-                  }
-                  className="block min-w-0  py-1.5 pr-3 pl-1 text-base text-[#D22519] placeholder:text-[#D22519] border-2 border-[#D22519] rounded-[10px] focus:outline-none sm:text-sm/6 w-[1201.33px] h-[71.71px] font-['Karla']"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="sm:col-span-4">
-            <label className="block text-sm/6 font-medium text-[#D22519] pl-9 p-1.5 font-['Karla']">
-              Validade do Produto
-            </label>
-            <div className="mt-2">
-              <div className="flex items-center rounded-md bg-white/5 pl-3 outline-1 -outline-offset-1 outline-white/10 ">
-                <input
-                  id="validade"
-                  type="text"
-                  name="validade"
-                  placeholder="Informe a Validade do Produto: dd/mm/aaaa"
-                  value={produto.validade}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    atualizarEstado(e)
-                  }
-                  className="block min-w-0  py-1.5 pr-3 pl-1 text-base text-[#D22519] placeholder:text-[#D22519] border-2 border-[#D22519] rounded-[10px] focus:outline-none sm:text-sm/6 w-[1201.33px] h-[71.71px] font-['Karla']"
-                />
-              </div>
-            </div>
-          </div>
-
+          {/* Botão */}
           <button
             type="submit"
-            className="bg-[#9DBDB8] w-[321.75px] h-[61.93px] text-[#D22519] rounded-4xl text-bold m-5 shadow cursor-pointer font-bold font-['Julius_Sans_One'] flex items-center justify-center"
+            className="
+              mt-6
+              mx-auto
+              bg-[#9DBDB8]
+              hover:bg-[#839558]
+              hover:scale-105
+              transition-all
+              duration-300
+              w-[350px]
+              h-[70px]
+              text-[#D22519]
+              rounded-full
+              shadow-lg
+              cursor-pointer
+              font-bold
+              text-xl
+              font-['Julius_Sans_One']
+              flex
+              items-center
+              justify-center
+            "
           >
             {isLoading ? (
-              <ClipLoader color="#ffffff" size={24} />
+              <ClipLoader color="#ffffff" size={30} />
+            ) : id === undefined ? (
+              "Cadastrar Produto"
             ) : (
-              <span>
-                {id === undefined ? "Cadastrar Produto" : "Atualizar"}
-              </span>
+              "Atualizar"
             )}
           </button>
         </div>

@@ -20,6 +20,13 @@
       "categoriaVegano": false,
       "categoriaOrganico": false,
       "descricao": "O bolo menos saudável do mundo!"
+    },
+    {
+      "tipo": "salada",
+      "descricao": "tipos de salada",
+      "categoriaVegano": true,
+      "categoriaOrganico": true,
+      "id": "P3viCTryQh8"
     }
   ],
   "produtos": [
@@ -29,14 +36,55 @@
       "valor": 50,
       "marca": "LeBolle",
       "validade": "04/12/2026",
-      "categoriaId": 1
+      "categoria": {
+        "id": "1",
+        "tipo": "Bolo",
+        "categoriaVegano": false,
+        "categoriaOrganico": false,
+        "descricao": "O bolo menos saudável do mundo!"
+      }
     },
     {
+      "id": "R3biZjKUtWA",
       "nome": "bolo",
+      "valor": 25,
+      "marca": "mc donalds",
+      "validade": "15/07/2007",
+      "categoria": {
+        "id": "1",
+        "tipo": "Bolo",
+        "categoriaVegano": false,
+        "categoriaOrganico": false,
+        "descricao": "O bolo menos saudável do mundo!"
+      }
+    },
+    {
+      "nome": "salada de frutas",
       "valor": "25.00",
       "marca": "mc donalds",
       "validade": "15/07/2007",
-      "id": "R3biZjKUtWA"
+      "categoria": {
+        "tipo": "salada",
+        "descricao": "tipos de salada",
+        "categoriaVegano": true,
+        "categoriaOrganico": true,
+        "id": "P3viCTryQh8"
+      },
+      "id": "e2YNGixauRU"
+    },
+    {
+      "nome": "Salada de legumes",
+      "valor": "50.00",
+      "marca": "mc donalds",
+      "validade": "15/07/2007",
+      "categoria": {
+        "tipo": "salada",
+        "descricao": "tipos de salada",
+        "categoriaVegano": true,
+        "categoriaOrganico": true,
+        "id": "P3viCTryQh8"
+      },
+      "id": "dO5tsQsA4bs"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
