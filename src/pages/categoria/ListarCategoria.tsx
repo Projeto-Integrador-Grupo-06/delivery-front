@@ -27,7 +27,7 @@ function ListaCategorias() {
     }
 
     return (
-        <>
+        <div className="w-full bg-[#F0E7D6] py-4">
             {isLoading && (
                 <div className="flex justify-center w-full my-8">
                     <SyncLoader
@@ -37,7 +37,7 @@ function ListaCategorias() {
                 </div>
             )}
 
-            <div className="flex justify-center w-full my-4">
+            <div className="flex justify-center w-full">
                 <div className="container flex flex-col">
 
                     {!isLoading && categorias.length === 0 && (
@@ -47,19 +47,17 @@ function ListaCategorias() {
                     )}
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
                         {categorias.map((categoria) => (
                             <CardCategoria
                                 key={categoria.id}
                                 categoria={categoria}
                             />
                         ))}
-
                     </div>
 
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 

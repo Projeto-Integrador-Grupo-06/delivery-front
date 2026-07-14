@@ -1,5 +1,5 @@
 import ModalProduto from "../../components/produto/modalproduto/ModalProduto";
-import ListarProdutos from "../categoria/ListarCategoria";
+import ListarProdutos from "../produto/ListarProdutos";
 
 function Home() {
   return (
@@ -33,9 +33,6 @@ function Home() {
             />
           </div>
         </div>
-      </div>
-      <div className="text-3xl text-[#d22519] px-15"style={{ fontFamily: "'Karla', sans-serif" }}>
-        <p>PRODUTOS</p>
       </div>
       <ListarProdutos />
     </>
